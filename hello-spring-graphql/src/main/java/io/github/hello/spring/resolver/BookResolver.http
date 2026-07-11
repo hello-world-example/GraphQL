@@ -1,0 +1,25 @@
+###
+GRAPHQL http://localhost:8080/graphql
+
+{
+    bookById(id: 1) {
+        id,
+        title,
+        authors {
+            name
+        }
+    }
+}
+
+###
+GRAPHQL http://localhost:8080/graphql
+
+{
+    books {
+        id,
+        title,
+        authors {
+            name
+        }
+    }
+}

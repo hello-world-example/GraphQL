@@ -1,0 +1,11 @@
+# 这里的命名必须与 Java Controller 中的方法名或注解参数对应
+type Query {
+    books: [Book]                      # 查询所有图书
+    bookById(id: ID!): Book       # 根据 ID 查询单本图书
+}
+
+type Book {
+    id: ID!
+    title: String!
+    author: String!
+}

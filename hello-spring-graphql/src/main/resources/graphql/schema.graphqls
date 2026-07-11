@@ -1,0 +1,23 @@
+# 这里的命名必须与 Java Controller 中的方法名或注解参数对应
+type Query {
+    # 查询所有图书
+    books: [Book]
+    # 根据 ID 查询单本图书
+    bookById(id: ID!): Book
+}
+
+"""
+这是注释
+# 支持 Markdown
+"""
+type Book {
+    id: ID!
+    title: String!
+    authors: [Author]
+}
+
+type Author {
+    id: ID! @deprecated(reason: "请迁移使用 `fullName` 字段，该字段计划于 Q3 移除。")
+    name: String!
+}
+
