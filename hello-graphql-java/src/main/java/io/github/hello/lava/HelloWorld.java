@@ -18,19 +18,22 @@ public class HelloWorld {
                 }
                 """;
 
-        SchemaParser schemaParser = new SchemaParser();
-        TypeDefinitionRegistry typeDefinitionRegistry = schemaParser.parse(schema);
+        // Parse Schema
+        TypeDefinitionRegistry typeDefinitionRegistry = new SchemaParser().parse(schema);
 
+        // Fetcher && Loader
+        StaticDataFetcher dataFetcher = new StaticDataFetcher("world");
+
+
+        // Bind
         RuntimeWiring runtimeWiring = RuntimeWiring.newRuntimeWiring()
-                .type("Query", builder -> builder.dataFetcher("hello", new StaticDataFetcher("world")))
+                .type("Query", builder -> builder.dataFetcher("hello", dataFetcher))
                 .build();
-
-        SchemaGenerator schemaGenerator = new SchemaGenerator();
-        GraphQLSchema graphQLSchema = schemaGenerator.makeExecutableSchema(typeDefinitionRegistry, runtimeWiring);
-
+        GraphQLSchema graphQLSchema = new SchemaGenerator().makeExecutableSchema(typeDefinitionRegistry, runtimeWiring);
         GraphQL build = GraphQL.newGraphQL(graphQLSchema).build();
-        ExecutionResult executionResult = build.execute("{hello}");
 
+        // execution
+        ExecutionResult executionResult = build.execute("{hello}");
         System.out.println(executionResult.getData().toString());
         // Prints: {hello=world}
     }

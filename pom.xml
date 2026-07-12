@@ -17,6 +17,7 @@
     <modules>
         <module>hello-graphql-java</module>
         <module>hello-spring-graphql</module>
+        <module>hello-java-dataloader</module>
     </modules>
 
     <properties>
